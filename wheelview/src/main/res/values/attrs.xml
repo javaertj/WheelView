@@ -3,8 +3,10 @@
 
     <!-- 仿wheelview的listvie-->
     <declare-styleable name="WheelView">
-        <attr name="float_layout" format="reference" />
-        <attr name="background_resources" format="reference|color" />
+        <attr name="wheel_float_layout" format="reference" />
+        <attr name="wheel_background_resources" format="reference|color" />
+        <attr name="wheel_item_top_padding" format="dimension" />
+        <attr name="wheel_item_bottom_padding" format="dimension" />
     </declare-styleable>
 
 </resources>

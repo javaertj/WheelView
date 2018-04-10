@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         List<WheelItem> wheelItems = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             WheelItem wheelItem = new WheelItem();
-            wheelItem.setName("我是Whee" + i);
+            wheelItem.setName("我是Wheel" + i);
             wheelItem.setAvatarUrl("drawable://" + R.mipmap.customer_service_head);
             wheelItems.add(wheelItem);
         }

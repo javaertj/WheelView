@@ -15,7 +15,6 @@ import android.widget.ListView;
  */
 public class WheelListView extends ListView {
     private static final String TAG = "WheelListView";
-    private static final int POSITION_OFFSET_PREFIX = 30;
     private final Object SCROLL_LOCK = new Object();
 
     private int topY;
@@ -46,6 +45,8 @@ public class WheelListView extends ListView {
         super.setAdapter(adapter);
         wheelAdapter = adapter;
         setCallback(adapter);
+        //滚动到第一个item位置
+        adapter.onHandleIdle(this,selectPosition);
     }
 
     private void setCallback(OnScrollCallback callback) {
@@ -53,25 +54,26 @@ public class WheelListView extends ListView {
     }
 
     /**
-     * 初始化
+     * 设置相关属性
      *
-     * @param selectView
+     * @param floatView     悬浮视图
+     * @param topPadding    WheelAdapter的item里要显示在悬浮框内的区域的顶部的padding高度 px
+     * @param bottomPadding  WheelAdapter的item里要显示在悬浮框内的区域的底部的padding高度 px
      */
-    protected void setUp(View selectView, View rootView) {
-        if (null == selectView || null == rootView) {
-            return;
+    protected void setUp(View floatView, int topPadding, int bottomPadding) {
+        if (null == floatView ) {
+            throw new NullPointerException("floatView or rootView can not be null");
         }
-        //让listview真正的显示区域的顶部与悬浮框顶部对其
-        setPadding(0, selectView.getTop() - POSITION_OFFSET_PREFIX, 0,
-                rootView.getBottom() - selectView.getBottom() + POSITION_OFFSET_PREFIX);
-
+        //让listview的显示区域高度和悬浮框的的高度一样。topPadding和bottomPadding用来增大或减小listView的显示区域
+        setPadding(0, floatView.getTop() - topPadding, 0,
+                getBottom() - floatView.getBottom() - bottomPadding);
         //获取悬浮框在屏幕的绝对位置
         int location[] = new int[2];
-        selectView.getLocationOnScreen(location);
+        floatView.getLocationOnScreen(location);
 
         topY = location[1];
-        middleY = topY + selectView.getMeasuredHeight() / 2;
-        bottomY = topY + selectView.getMeasuredHeight();
+        middleY = topY + floatView.getMeasuredHeight() / 2;
+        bottomY = topY + floatView.getMeasuredHeight();
 
         setUpScroll();
     }

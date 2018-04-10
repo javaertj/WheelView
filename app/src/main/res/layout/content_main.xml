@@ -11,8 +11,8 @@
 
     <com.ykbjson.lib.wheelview.WheelView
         android:id="@+id/wheel"
-        app:background_resources="@mipmap/trip_bg"
-        app:float_layout="@layout/include_wheel_float"
+        app:wheel_background_resources="@mipmap/trip_bg"
+        app:wheel_float_layout="@layout/include_wheel_float"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

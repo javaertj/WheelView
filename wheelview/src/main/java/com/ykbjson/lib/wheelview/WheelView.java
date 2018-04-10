@@ -20,7 +20,9 @@ import android.widget.ImageView;
 public class WheelView extends FrameLayout {
     private static final String TAG = "WheelView";
     private WheelListView wheelListView;
-    private View mSelectView;
+    private View mFloatView;
+    private int wheelItemTopPadding;
+    private int wheelItemBottomPadding;
 
     public WheelView(Context context) {
         this(context, null);
@@ -43,9 +45,11 @@ public class WheelView extends FrameLayout {
      */
     private void initView(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WheelView);
-        int floatId = typedArray.getResourceId(R.styleable.WheelView_float_layout, -1);
-        int bgId = typedArray.getResourceId(R.styleable.WheelView_background_resources, -1);
-        Log.d(TAG,"bgId : " + bgId);
+        int floatId = typedArray.getResourceId(R.styleable.WheelView_wheel_float_layout, -1);
+        int bgId = typedArray.getResourceId(R.styleable.WheelView_wheel_background_resources, -1);
+        wheelItemTopPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_top_padding, 0);
+        wheelItemBottomPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_bottom_padding, 0);
+        Log.d(TAG, "bgId : " + bgId + " floatId : " + floatId);
         typedArray.recycle();
         if (-1 == floatId) {
             throw new IllegalArgumentException("WheelView_background_resources is invalid");
@@ -73,16 +77,18 @@ public class WheelView extends FrameLayout {
         addView(wheelListView, params);
 
         //悬浮视图
-        mSelectView = LayoutInflater.from(context).inflate(floatId, this, false);
+        mFloatView = LayoutInflater.from(context).inflate(floatId, this, false);
         params = new FrameLayout.LayoutParams(-1, -2);
         params.gravity = Gravity.CENTER;
-        addView(mSelectView, params);
+        addView(mFloatView, params);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        wheelListView.setUp(mSelectView, this);
+        if (changed) {
+            wheelListView.setUp(mFloatView, wheelItemTopPadding, wheelItemBottomPadding);
+        }
     }
 
     public void setAdapter(WheelAdapter adapter) {
