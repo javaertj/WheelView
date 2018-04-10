@@ -28,7 +28,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     implementation 'com.nineoldandroids:library:2.4.0'
-
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation project(':wheelview')
-
 }

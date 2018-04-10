@@ -7,7 +7,7 @@
 
 当前demo里效果如下图所示
 
-![]()
+![](https://raw.githubusercontent.com/ykbjson/WheelView/master/wheelview.gif)
 
 
 # 使用注意事项

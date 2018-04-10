@@ -135,6 +135,4 @@ public class MainActivity extends AppCompatActivity {
         // 全局初始化此配置
         ImageLoader.getInstance().init(config);
     }
-
-
 }
