@@ -12,6 +12,40 @@
 
 # 使用注意事项
 
+
 1.要想实现demo里的效果时，在布局floatView的高度时，要注意与item的高度差距大不大，比如我就吧floatView的高度和item的高度设置成了一样高。
 
-2.
+
+2.关于WheelListView里面的setUp方法里
+
+'
+
+	/**
+	     * 设置相关属性
+	     *
+	     * @param floatView     悬浮视图
+	     * @param topPadding    WheelAdapter的item里要显示在悬浮框内的区域的顶部的padding高度 px
+	     * @param bottomPadding  WheelAdapter的item里要显示在悬浮框内的区域的底部的padding高度 px
+	     */
+	    protected void setUp(View floatView, int topPadding, int bottomPadding) {
+	        if (null == floatView ) {
+	            throw new NullPointerException("floatView or rootView can not be null");
+	        }
+	        //让listview的显示区域高度和悬浮框的的高度一样。topPadding和bottomPadding用来增大或减小listView			 //的显示区域
+	        setPadding(0, floatView.getTop() - topPadding, 0,
+	                getBottom() - floatView.getBottom() - bottomPadding);
+	        //获取悬浮框在屏幕的绝对位置
+	        int location[] = new int[2];
+	        floatView.getLocationOnScreen(location);
+	
+	        topY = location[1];
+	        middleY = topY + floatView.getMeasuredHeight() / 2;
+	        bottomY = topY + floatView.getMeasuredHeight();
+	
+	        setUpScroll();
+	    }
+	    
+
+'
+
+topPadding和bottomPadding，这里要理解到这两个值实际的意义后再去使用。我的demo里是为了实现那样的效果，所以控制了item的高度和floatview的高度，所以这两个值传0也不影响。如果你想实现的效果里item高度严重不统一，且与floatview高度差距过大，可能本库就不太适合做你需要的效果。当然，你也可以下载源码后自行改造。

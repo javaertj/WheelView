@@ -18,7 +18,7 @@ public class WheelViewAdapter extends WheelAdapter<WheelItem> {
          * @param context 上下文
          * @param data    数据源
          */
-        public WheelViewAdapter(Context context, List data) {
+        public WheelViewAdapter(Context context, List<WheelItem> data) {
             super(context, data, R.layout.include_wheel_view_item);
         }
 
