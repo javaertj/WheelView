@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 仿wheelview的listvie-->
+    <declare-styleable name="WheelView">
+        <attr name="float_layout" format="reference" />
+        <attr name="background_resources" format="reference|color" />
+    </declare-styleable>
+
+</resources>

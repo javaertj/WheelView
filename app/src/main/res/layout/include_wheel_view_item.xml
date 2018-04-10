@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:clipChildren="false"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_gravity="top|center_horizontal"
+        android:src="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/layout_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="蒋一梅" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:src="@android:color/darker_gray" />
+
+</LinearLayout>
