@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
@@ -41,12 +42,16 @@ public class WheelListView extends ListView {
         setClipToPadding(false);
     }
 
-    public void setAdapter(WheelAdapter adapter) {
+    @Override
+    public void setAdapter(ListAdapter adapter) {
+        if (!(adapter instanceof WheelAdapter)) {
+            throw new IllegalArgumentException("Adapter must be a subclass of WheelAdapter");
+        }
         super.setAdapter(adapter);
-        wheelAdapter = adapter;
-        setCallback(adapter);
+        wheelAdapter = (WheelAdapter) adapter;
+        setCallback(wheelAdapter);
         //滚动到第一个item位置
-        adapter.onHandleIdle(this,selectPosition);
+        wheelAdapter.onHandleIdle(this, selectPosition);
     }
 
     private void setCallback(OnScrollCallback callback) {
@@ -58,10 +63,10 @@ public class WheelListView extends ListView {
      *
      * @param floatView     悬浮视图
      * @param topPadding    WheelAdapter的item里要显示在悬浮框内的区域的顶部的padding高度 px
-     * @param bottomPadding  WheelAdapter的item里要显示在悬浮框内的区域的底部的padding高度 px
+     * @param bottomPadding WheelAdapter的item里要显示在悬浮框内的区域的底部的padding高度 px
      */
     protected void setUp(View floatView, int topPadding, int bottomPadding) {
-        if (null == floatView ) {
+        if (null == floatView) {
             throw new NullPointerException("floatView or rootView can not be null");
         }
         //让listview的显示区域高度和悬浮框的的高度一样。topPadding和bottomPadding用来增大或减小listView的显示区域

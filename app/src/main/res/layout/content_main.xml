@@ -4,16 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    android:clipChildren="false"
     tools:showIn="@layout/activity_main">
 
     <com.ykbjson.lib.wheelview.WheelView
         android:id="@+id/wheel"
-        app:wheel_background_resources="@mipmap/trip_bg"
-        app:wheel_float_layout="@layout/include_wheel_float"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:wheel_float_layout="@layout/include_wheel_float" >
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layerType="software"
+            android:src="@mipmap/trip_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.ykbjson.lib.wheelview.WheelView>
 
 </android.support.constraint.ConstraintLayout>

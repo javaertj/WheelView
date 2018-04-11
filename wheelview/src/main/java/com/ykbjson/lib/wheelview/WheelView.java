@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 /**
  * 包名：com.ykbjson.lib.wheelview
@@ -19,6 +18,7 @@ import android.widget.ImageView;
  */
 public class WheelView extends FrameLayout {
     private static final String TAG = "WheelView";
+    private int floatLayoutResId;
     private WheelListView wheelListView;
     private View mFloatView;
     private int wheelItemTopPadding;
@@ -34,50 +34,38 @@ public class WheelView extends FrameLayout {
 
     public WheelView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context, attrs);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WheelView);
+        floatLayoutResId = typedArray.getResourceId(R.styleable.WheelView_wheel_float_layout, -1);
+        wheelItemTopPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_top_padding, 0);
+        wheelItemBottomPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_bottom_padding, 0);
+        typedArray.recycle();
+        Log.d(TAG, "floatLayoutResId : " + floatLayoutResId);
+        if (-1 == floatLayoutResId) {
+            throw new IllegalArgumentException("WheelView_wheel_float_layout is invalid");
+        }
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        initView(getContext());
     }
 
     /**
      * 初始化视图
      *
      * @param context
-     * @param attrs
      */
-    private void initView(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WheelView);
-        int floatId = typedArray.getResourceId(R.styleable.WheelView_wheel_float_layout, -1);
-        int bgId = typedArray.getResourceId(R.styleable.WheelView_wheel_background_resources, -1);
-        wheelItemTopPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_top_padding, 0);
-        wheelItemBottomPadding = typedArray.getDimensionPixelSize(R.styleable.WheelView_wheel_item_bottom_padding, 0);
-        Log.d(TAG, "bgId : " + bgId + " floatId : " + floatId);
-        typedArray.recycle();
-        if (-1 == floatId) {
-            throw new IllegalArgumentException("WheelView_background_resources is invalid");
-        }
-        //背景
-        ImageView imageView = new ImageView(context);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        try {
-            imageView.setLayerType(LAYER_TYPE_SOFTWARE, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (-1 != bgId) {
-            imageView.setImageResource(bgId);
-        }
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -1);
-        addView(imageView, params);
-
+    private void initView(Context context) {
         //listview
         wheelListView = new WheelListView(context);
         wheelListView.setBackgroundColor(Color.TRANSPARENT);
-        params = new FrameLayout.LayoutParams(-1, -1);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -1);
         params.gravity = Gravity.CENTER;
         addView(wheelListView, params);
 
         //悬浮视图
-        mFloatView = LayoutInflater.from(context).inflate(floatId, this, false);
+        mFloatView = LayoutInflater.from(context).inflate(floatLayoutResId, this, false);
         params = new FrameLayout.LayoutParams(-1, -2);
         params.gravity = Gravity.CENTER;
         addView(mFloatView, params);
