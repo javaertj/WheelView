@@ -108,3 +108,24 @@ gradle
 
 topPadding和bottomPadding，这里要理解到这两个值实际的意义后再去使用。我的demo里是为了实现那样的效果，所以控制了item的高度和floatview的高度，所以这两个值传0也不影响。如果你想实现的效果里item高度严重不统一，且与floatview高度差距过大，可能本库就不太适合做你需要的效果。当然，你也可以下载源码后自行改造。
 
+## License
+
+'
+
+	Copyright 2018 ykbjson
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	   http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.	
+
+
+'
+ 
