@@ -16,7 +16,7 @@
         app:wheel_float_layout="@layout/include_wheel_float" >
 
         <ImageView
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layerType="software"
             android:src="@mipmap/trip_bg"
             android:layout_width="match_parent"
