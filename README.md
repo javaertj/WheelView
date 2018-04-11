@@ -32,7 +32,7 @@ maven
 	<dependency>
 	    <groupId>com.github.ykbjson</groupId>
 	    <artifactId>WheelView</artifactId>
-	    <version>v1.0.0</version>
+	    <version>v1.0.1</version>
 	</dependency>
 
 
@@ -61,7 +61,7 @@ gradle
 '
 
 	dependencies {
-		        compile 'com.github.ykbjson:WheelView:v1.0.0'
+		        compile 'com.github.ykbjson:WheelView:v1.0.1'
 		}
 
 
